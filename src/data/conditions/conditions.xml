@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<condition>
+	<or>
+		<and>
+			<user_level_gt level="3" />
+			<unit_level_eq type="A" level="2" />
+			<unit_level_eq type="B" level="5" />
+			<not>
+				<unit_upgrade_started type="B" />
+			</not>			
+		</and>
+		<user_level_gt level="4" />
+	</or>
+</condition>

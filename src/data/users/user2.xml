@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<user level="8">
+	<units>
+		<unit type="A" level="3" />
+		<unit type="B" level="5" />
+		<unit type="C" level="2" />
+	</units>
+	<processes>
+		<upgrade_unit type="B" />
+	</processes>
+</user>

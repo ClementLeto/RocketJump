@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600" xmlns:local="*">
+	<fx:Declarations>
+
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[	
+			import mx.rpc.xml.SimpleXMLDecoder;
+			
+			import core.Conditions;
+			import core.Helpers;
+			import core.User;
+			
+			import net.Request;
+			
+			internal var loadedUser:User = null;
+			internal var loadedConditions:Conditions = null;;
+			
+			protected function load_user_clickHandler():void {
+				if (userId.text == "") {
+					message.text = "Empty user id!";
+					return;
+				}
+				
+				Request.loadXMLUserById(int(userId.text), function(response:Object):void {
+					if (!Helpers.empty(response)) {											
+						loadedUser = new User(response);
+						message.text = "User is loaded";
+					}						
+				});				
+			}
+			
+			protected function load_conditions_clickHandler():void {
+				Request.loadXMLConditions(function(response:Object):void {
+					if (!Helpers.empty(response)) {											
+						loadedConditions = new Conditions(response);
+						message.text = "Conditions is loaded";
+					}						
+				});				
+			}
+			
+			protected function check_clickHandler():void {
+				if (Helpers.empty(loadedUser)) {
+					message.text = "User not loaded";
+				}
+				if (Helpers.empty(loadedConditions)) {
+					message.text = "Conditions not loaded";
+				}
+				var result:Boolean = loadedConditions.check(loadedUser);
+				if (result) {
+					message.text = "Available";
+				} else {
+					message.text = loadedConditions.errorMsg;
+				}				
+			}
+						
+		]]>
+	</fx:Script>
+	
+	<s:Panel left="10" top="10" width = "250" title="Upgrade units">
+		<s:VGroup left="10" top="10" right="10" bottom="10">
+			<mx:Text text="Please input user id: " />
+			<local:NumericInput text = "1" id="userId" width="200"/>
+			<s:Button label="Load user" width="200" click="load_user_clickHandler()"/>
+			<s:Button label="Load conditions" width="200" click="load_conditions_clickHandler()"/>
+			<s:Button label="Check" width="200" click="check_clickHandler()"/>
+			<mx:Text id="message" text=" " />
+		</s:VGroup>		
+	</s:Panel>
+</s:Application>
