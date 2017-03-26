@@ -7,9 +7,7 @@
 	</fx:Declarations>
 	
 	<fx:Script>
-		<![CDATA[	
-			import mx.rpc.xml.SimpleXMLDecoder;
-			
+		<![CDATA[				
 			import core.Conditions;
 			import core.Helpers;
 			import core.User;
