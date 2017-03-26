@@ -29,7 +29,9 @@
 					if (!Helpers.empty(response)) {											
 						loadedUser = new User(response);
 						message.text = "User is loaded";
-					}						
+					} else {
+						message.text = "User not found";
+					}
 				});				
 			}
 			

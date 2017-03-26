@@ -52,8 +52,12 @@ package net
 			}
 		}
 		
-		private function requestError():void {
-			//TODO: show error
+		private function requestError(event:Event):void {
+			//TODO: need other structure of response
+			if (!Helpers.empty(this._callback)) {				
+				this._callback(null);
+				this._callback = null;
+			}
 		}
 	}
 }
